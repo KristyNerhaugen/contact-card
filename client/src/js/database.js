@@ -16,3 +16,52 @@ export const initdb = async () => {
     },
   });
 };
+
+// async export function getDb() to retrieve (or READ) data from IndexedDB database
+// function to GET to the database
+export const getDb = async () => {
+  console.log("GET from the database");
+
+  //connection to the IndexedDb database and the version we wnat to use
+  const contactDb = await openDB("contact_db", 1);
+
+  //create new transation and specify the store and data privileges
+  const tx = contactDb.transaction("contacts", "readonly");
+
+  //open up desired object store
+  const store = tx.objectStore("contacts");
+
+  // getAll() method to get all data in database
+  const request = store.getAll();
+
+  // get confirmation of the request
+  const result = await request;
+  console.log("result.value", result);
+  return result;
+};
+
+// async export function postDb() to POST data from IndexedDB database
+export const postDb = async (name, email, phone, profile) => {
+  console.log("POST to the database");
+
+  //connection to the IndexedDb database and the version we want to use
+  const contactDb = await openDB("contact_db", 1);
+
+  //create new transation and specify the store and data privileges
+  const tx = contactDb.transaction("contacts", "readonly");
+
+  //open up desired object store
+  const store = tx.objectStore("contacts");
+
+  // add() method to pass in content
+  const request = store.add({
+    name: name,
+    email: email,
+    phone: phone,
+    profile: profile,
+  });
+
+  // get confirmation of the request
+  const result = await request;
+  console.log("data added and saved to the database", result);
+};

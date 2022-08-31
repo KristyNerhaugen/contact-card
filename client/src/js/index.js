@@ -14,12 +14,15 @@ import Logo from "../images/logo.png";
 import Bear from "../images/bear.png";
 import Dog from "../images/dog.png";
 
-// import initDb function from database.js
-import { initdb } from "./database";
+// import initDb, getDb, and postDb functions from database.js
+import { initdb, getDb, postDb } from "./database";
 
 // add images on load
 window.addEventListener("load", function () {
   initdb();
+  getDb();
+  postDb("UserNameOne", "UserOne@email.com", 1234567891, "Bear");
+  getDb();
   document.getElementById("logo").src = Logo;
   document.getElementById("bearThumbnail").src = Bear;
   document.getElementById("dogThumbnail").src = Dog;
