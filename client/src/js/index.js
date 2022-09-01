@@ -14,8 +14,8 @@ import Logo from "../images/logo.png";
 import Bear from "../images/bear.png";
 import Dog from "../images/dog.png";
 
-// import initDb, getDb, and postDb functions from database.js
-import { initdb, getDb, postDb } from "./database";
+// import initDb, getDb, postDb, and deleteDb functions from database.js
+import { initdb, getDb, postDb, deleteDb } from "./database";
 
 // import fetchCards() function from cards.js
 import { fetchCards } from "./cards";
@@ -66,3 +66,13 @@ form.addEventListener("submit", (event) => {
   // Reload the DOM
   fetchCards();
 });
+
+//delete card
+window.deleteCard = (e) => {
+  // Grabs the id from the button element attached to the contact card.
+  let id = parseInt(e.id);
+  // Delete the card
+  deleteDb(id);
+  // Reload the DOM
+  fetchCards();
+};
