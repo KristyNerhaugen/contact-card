@@ -66,6 +66,7 @@ export const postDb = async (name, email, phone, profile) => {
   console.log("data added and saved to the database", result);
 };
 
+//async function for deleting
 export const deleteDb = async (id) => {
   console.log("DELETE from the database", id);
 
@@ -85,4 +86,31 @@ export const deleteDb = async (id) => {
   const result = await request;
   console.log("result.value", result);
   return result?.value;
+};
+
+//async function for updating/editing
+export const editDb = async (id, name, email, phone, profile) => {
+  console.log("Put to database");
+
+  // Create a connection to the IndexedDB database and the version we want to use.
+  const contactDb = await openDB("contact_db", 1);
+
+  // Create a new transaction and specify the store and data privileges.
+  const tx = contactDb.transaction("contacts", "readwrite");
+
+  // Open up the desired object store.
+  const store = tx.objectStore("contacts");
+
+  // Use the .put() method to get data and update a particular object
+  const request = store.put({
+    id: id,
+    name: name,
+    email: email,
+    phone: phone,
+    profile: profile,
+  });
+
+  // Get confirmation of the request.
+  const result = await request;
+  console.log("new data saved to database!", result);
 };
