@@ -48,7 +48,7 @@ export const postDb = async (name, email, phone, profile) => {
   const contactDb = await openDB("contact_db", 1);
 
   //create new transation and specify the store and data privileges
-  const tx = contactDb.transaction("contacts", "readonly");
+  const tx = contactDb.transaction("contacts", "readwrite");
 
   //open up desired object store
   const store = tx.objectStore("contacts");
