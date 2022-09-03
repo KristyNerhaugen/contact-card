@@ -1,3 +1,9 @@
+// import initDb, getDb, postDb, and deleteDb functions from database.js
+import { initdb, postDb, deleteDb, editDb } from "./database";
+// import fetchCards() function from cards.js
+import { fetchCards } from "./cards";
+// import toggleForm and clearForm function from form.js
+import { toggleForm, clearForm } from "./form";
 //import modules
 import "./form";
 // import "./submit";
@@ -14,12 +20,6 @@ import Logo from "../images/logo.png";
 import Bear from "../images/bear.png";
 import Dog from "../images/dog.png";
 
-// import initDb, getDb, postDb, and deleteDb functions from database.js
-import { initdb, getDb, postDb, deleteDb, editDb } from "./database";
-
-// import fetchCards() function from cards.js
-import { fetchCards } from "./cards";
-
 // add images on load
 window.addEventListener("load", function () {
   initdb();
@@ -28,9 +28,6 @@ window.addEventListener("load", function () {
   document.getElementById("bearThumbnail").src = Bear;
   document.getElementById("dogThumbnail").src = Dog;
 });
-
-// import toggleForm and clearForm function from form.js
-import { toggleForm, clearForm } from "./form";
 
 // Form functionality
 const form = document.getElementById("formToggle");
@@ -101,3 +98,11 @@ window.editCard = (e) => {
   // Toggles the submit button so that it now Updates an existing contact instead of posting a new one
   submitBtnToUpdate = true;
 };
+
+//register service worker
+if ("serviceWorker" in navigator) {
+  // Use the window load event to keep the page load performant
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./service-worker.js");
+  });
+}
