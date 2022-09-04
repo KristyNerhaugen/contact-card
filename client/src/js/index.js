@@ -106,3 +106,22 @@ if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("./service-worker.js");
   });
 }
+
+// new variable to reference id of Install button
+const installBtn = document.getElementById("installBtn");
+// event listener to set install button to visible
+window.addEventListener("beforeinstallprompt", (event) => {
+  event.preventDefault();
+  installBtn.style.visibility = "visible";
+
+  installBtn.addEventListener("click", () => {
+    event.prompt();
+    installBtn.setAttribute("disabled", true);
+    installBtn.textContent = "Installed!";
+  });
+});
+
+// check if app has been installed
+window.addEventListener("appinstalled", (event) => {
+  console.log("👍", "appinstalled", event);
+});
