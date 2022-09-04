@@ -9,8 +9,8 @@ const WebpackPwaManifest = require("webpack-pwa-manifest");
 const path = require("path");
 
 module.exports = {
-  // add mode here? and set to development?
-  mode: "development",
+  // add mode here (and set to development, then prodution when ready)
+  mode: "production",
   entry: "./src/js/index.js",
   output: {
     filename: "bundle.js",
